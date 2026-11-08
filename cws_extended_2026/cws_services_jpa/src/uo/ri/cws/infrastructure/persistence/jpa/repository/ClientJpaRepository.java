@@ -20,8 +20,8 @@ public class ClientJpaRepository extends BaseJpaRepository<Client> implements Cl
 
     @Override
     public List<Client> findRecommendedBy(Nif recommenderNif) {
-        // TODO Auto-generated method stub
-        return null;
+        return Jpa.getManager().createNamedQuery("Client.findByRecommenderNif", Client.class)
+            .setParameter(1, recommenderNif).getResultList();
     }
 
     @Override

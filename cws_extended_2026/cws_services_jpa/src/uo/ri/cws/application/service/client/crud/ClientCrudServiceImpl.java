@@ -7,6 +7,9 @@ import uo.ri.conf.Factories;
 import uo.ri.cws.application.service.client.ClientCrudService;
 import uo.ri.cws.application.service.client.crud.commands.AddClient;
 import uo.ri.cws.application.service.client.crud.commands.DeleteClient;
+import uo.ri.cws.application.service.client.crud.commands.FindAllClients;
+import uo.ri.cws.application.service.client.crud.commands.FindClientByNif;
+import uo.ri.cws.application.service.client.crud.commands.FindClientsRecommendedBy;
 import uo.ri.cws.application.service.client.crud.commands.UpdateClient;
 import uo.ri.cws.application.util.command.CommandExecutor;
 import uo.ri.util.exception.BusinessException;
@@ -34,20 +37,17 @@ public class ClientCrudServiceImpl implements ClientCrudService {
 
     @Override
     public List<ClientDto> findAllClients() throws BusinessException {
-        // TODO Auto-generated method stub
-        return null;
+        return executor.execute(new FindAllClients());
     }
 
     @Override
     public Optional<ClientDto> findClientByNif(String nif) throws BusinessException {
-        // TODO Auto-generated method stub
-        return Optional.empty();
+        return executor.execute(new FindClientByNif(nif));
     }
 
     @Override
     public List<ClientDto> findClientsRecommendedBy(String recommenderNif) throws BusinessException {
-        // TODO Auto-generated method stub
-        return null;
+        return executor.execute(new FindClientsRecommendedBy(recommenderNif));
     }
 
 }

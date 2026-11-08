@@ -13,6 +13,15 @@
 		</query>
 	</named-query>
 	
+	<!-- Client queries -->
+	<named-query name="Client.findByRecommenderNif">
+		<query>
+			select r.recommended
+			from Recommendation r
+			where r.recommender.nif = ?1
+		</query>
+	</named-query>
+	
 	<!-- Invoice queries -->
 	<named-query name="Invoice.findByNumber">
 		<query>select f from Invoice f where f.number = ?1</query>
