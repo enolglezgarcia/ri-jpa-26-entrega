@@ -74,6 +74,14 @@
 			where pm.client.nif = ?1
 		</query>
 	</named-query>
+	
+	<named-query name="PaymentMean.findVouchersByClientNif">
+		<query>
+			select v
+			from Voucher v
+			where v.client.nif = ?1
+		</query>
+	</named-query>
 
 	<!-- Vehicle queries -->
 	<named-query name="Vehicle.findByPlate">
