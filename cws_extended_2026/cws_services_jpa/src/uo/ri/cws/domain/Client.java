@@ -173,4 +173,24 @@ public class Client extends BaseEntity {
         this.recommendedBy = recommendation;
     }
 
+    public void setNif(Nif nif) {
+        this.nif = nif;
+    }
+
+    public void setFullName(FullName fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setEmail(Email email) {
+        this.email = email;
+    }
+
+    public void setPhone(PhoneNumber phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
 }

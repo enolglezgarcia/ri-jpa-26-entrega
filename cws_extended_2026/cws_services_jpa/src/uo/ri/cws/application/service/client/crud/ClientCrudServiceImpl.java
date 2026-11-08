@@ -7,6 +7,7 @@ import uo.ri.conf.Factories;
 import uo.ri.cws.application.service.client.ClientCrudService;
 import uo.ri.cws.application.service.client.crud.commands.AddClient;
 import uo.ri.cws.application.service.client.crud.commands.DeleteClient;
+import uo.ri.cws.application.service.client.crud.commands.UpdateClient;
 import uo.ri.cws.application.util.command.CommandExecutor;
 import uo.ri.util.exception.BusinessException;
 
@@ -27,7 +28,7 @@ public class ClientCrudServiceImpl implements ClientCrudService {
 
     @Override
     public void updateClient(ClientDto client) throws BusinessException {
-        // TODO Auto-generated method stub
+        executor.execute(new UpdateClient(client));
 
     }
 
