@@ -238,7 +238,7 @@ public class Associations {
     }
 
     public static class Recommends {
-        static void link(Client recommender, Recommendation recommendation, Client recommended) {
+        public static void link(Client recommender, Recommendation recommendation, Client recommended) {
             ArgumentChecks.isNotNull(recommender, "Recommender cannot be null");
             ArgumentChecks.isNotNull(recommendation, "Recommendation cannot be null");
             ArgumentChecks.isNotNull(recommended, "Recommended client cannot be null");
@@ -255,7 +255,7 @@ public class Associations {
             recommended._setRecommendation(recommendation);
         }
 
-        static void unlink(Recommendation recommendation) {
+        public static void unlink(Recommendation recommendation) {
             ArgumentChecks.isNotNull(recommendation, "Recommendation cannot be null");
             StateChecks.isTrue(recommendation.getRecommended() != null, "Recommendation has no recommended client");
             StateChecks.isTrue(recommendation.getRecommender() != null, "Recommendation has no recommender client");
