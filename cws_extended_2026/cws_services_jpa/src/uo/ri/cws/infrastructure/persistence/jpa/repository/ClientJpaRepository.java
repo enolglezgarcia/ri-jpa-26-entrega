@@ -7,33 +7,33 @@ import uo.ri.cws.application.repository.ClientRepository;
 import uo.ri.cws.domain.Client;
 import uo.ri.cws.domain.types.Nif;
 import uo.ri.cws.infrastructure.persistence.jpa.util.BaseJpaRepository;
+import uo.ri.cws.infrastructure.persistence.jpa.util.Jpa;
 
-public class ClientJpaRepository 
-		extends BaseJpaRepository<Client> 
-		implements ClientRepository {
+public class ClientJpaRepository extends BaseJpaRepository<Client> implements ClientRepository {
 
-	@Override
+    @Override
     public Optional<Client> findByNif(Nif nif) {
-		throw new UnsupportedOperationException("Not implemented yet");
+        return Jpa.getManager().createNamedQuery("Client.findByNif", Client.class).setParameter(1, nif)
+            .getResultStream().findFirst();
+
     }
 
-	@Override
-	public List<Client> findRecommendedBy(Nif recommenderNif) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<Client> findRecommendedBy(Nif recommenderNif) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public List<Client> findWithWorkOrdersUnusedForVoucher(int minimumWorkOrders) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<Client> findWithWorkOrdersUnusedForVoucher(int minimumWorkOrders) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public List<Client> findWithRecommendationsUnusedForVoucher(int minimumRecommendations) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+    @Override
+    public List<Client> findWithRecommendationsUnusedForVoucher(int minimumRecommendations) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }
