@@ -243,27 +243,27 @@ public class Associations {
             ArgumentChecks.isNotNull(recommendation, "Recommendation cannot be null");
             ArgumentChecks.isNotNull(recommended, "Recommended client cannot be null");
             StateChecks.isTrue(recommended.getRecommendation() == null, "Client has already another recommendation");
-            StateChecks.isFalse(recommender.getRecommendations().contains(recommendation),
+            StateChecks.isFalse(recommender._getRecommendations().contains(recommendation),
                 "Recommender already has this recommendation");
             StateChecks.isFalse(recommendation.getRecommended() != null,
                 "Recommendation already has a recommended client");
             StateChecks.isFalse(recommendation.getRecommender() != null,
                 "Recommendation already has a recommender client");
-            recommendation._setRecommended(recommended);
             recommendation._setRecommender(recommender);
+            recommendation._setRecommended(recommended);
             recommender._getRecommendations().add(recommendation);
             recommended._setRecommendation(recommendation);
         }
 
         public static void unlink(Recommendation recommendation) {
             ArgumentChecks.isNotNull(recommendation, "Recommendation cannot be null");
-            StateChecks.isTrue(recommendation.getRecommended() != null, "Recommendation has no recommended client");
-            StateChecks.isTrue(recommendation.getRecommender() != null, "Recommendation has no recommender client");
             Client recommended = recommendation.getRecommended();
+            Client recommender = recommendation.getRecommender();
+            StateChecks.isTrue(recommended != null, "Recommendation has no recommended client");
+            StateChecks.isTrue(recommender != null, "Recommendation has no recommender client");
             StateChecks.isTrue(recommended.getRecommendation() == recommendation,
                 "Recommended client does not have this recommendation");
-            Client recommender = recommendation.getRecommender();
-            StateChecks.isTrue(recommender.getRecommendations().contains(recommendation),
+            StateChecks.isTrue(recommender._getRecommendations().contains(recommendation),
                 "Recommender client does not have this recommendation");
             recommendation.getRecommender()._getRecommendations().remove(recommendation);
             recommendation.getRecommended()._setRecommendation(null);

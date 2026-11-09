@@ -36,9 +36,9 @@ public class Client extends BaseEntity {
     private Set<Vehicle> vehicles = new HashSet<>();
     @OneToMany(mappedBy = "client")
     private Set<PaymentMean> paymentMeans = new HashSet<>();
-    @OneToOne(mappedBy = "recommender")
+    @OneToOne(mappedBy = "recommended")
     private Recommendation recommendedBy;
-    @OneToMany(mappedBy = "recommended")
+    @OneToMany(mappedBy = "recommender")
     private Set<Recommendation> recommendations = new HashSet<>();
 
     // ---- Constructors ----

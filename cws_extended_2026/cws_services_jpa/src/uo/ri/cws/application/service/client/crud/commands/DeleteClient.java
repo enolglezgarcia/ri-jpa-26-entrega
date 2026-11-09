@@ -7,9 +7,11 @@ import uo.ri.cws.application.repository.ClientRepository;
 import uo.ri.cws.application.repository.PaymentMeanRepository;
 import uo.ri.cws.application.repository.RecommendationRepository;
 import uo.ri.cws.application.util.command.Command;
+import uo.ri.cws.domain.Associations;
 import uo.ri.cws.domain.Charge;
 import uo.ri.cws.domain.Client;
 import uo.ri.cws.domain.PaymentMean;
+import uo.ri.cws.domain.Recommendation;
 import uo.ri.cws.domain.types.Nif;
 import uo.ri.util.assertion.ArgumentChecks;
 import uo.ri.util.exception.BusinessChecks;
@@ -34,13 +36,22 @@ public class DeleteClient implements Command<Void> {
 
         Client client = clientRepo.findByNif(new Nif(clientNif)).get();
 
-        client.getPaymentMeans().forEach(pm -> paymentMeanRepo.remove(pm));
-
-        if (client.getRecommendation() != null) {
-            recommendationRepo.remove(client.getRecommendation());
+        for (PaymentMean pm : client.getPaymentMeans()) {
+            Associations.Holds.unlink(pm);
+            paymentMeanRepo.remove(pm);
         }
 
-        client.getRecommendations().forEach(reco -> recommendationRepo.remove(reco));
+        if (client.getRecommendation() != null) {
+            Recommendation r = client.getRecommendation();
+            Associations.Recommends.unlink(r);
+            recommendationRepo.remove(r);
+        }
+
+        for (Recommendation recommendation : client.getRecommendations()) {
+            Associations.Recommends.unlink(recommendation);
+            recommendationRepo.remove(recommendation);
+        }
+
         clientRepo.remove(client);
 
         return null;
