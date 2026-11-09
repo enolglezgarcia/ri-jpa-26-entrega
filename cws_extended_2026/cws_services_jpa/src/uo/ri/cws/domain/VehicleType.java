@@ -1,7 +1,5 @@
 package uo.ri.cws.domain;
 
-import java.util.Objects;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,26 +34,6 @@ public class VehicleType extends BaseEntity {
 
     public Money getPricePerHour() {
         return pricePerHour;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        VehicleType other = (VehicleType) obj;
-        return Objects.equals(name, other.name);
     }
 
     @Override
