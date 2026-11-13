@@ -37,10 +37,11 @@ public class UpdateMechanic implements Command<Void> {
 
         if (!nif.equals(m.getNif())) {
             checkNifDoesNotExist(nif);
+            BusinessChecks.isTrue(Nif.isValid(dto.nif));
             m.setNif(nif);
         }
+        BusinessChecks.isTrue(FullName.isValid(dto.name, dto.surname));
         FullName fullname = new FullName(dto.name, dto.surname);
-        m.setNif(nif);
         m.setFullName(fullname);
         m.updatedNow();
         return null;

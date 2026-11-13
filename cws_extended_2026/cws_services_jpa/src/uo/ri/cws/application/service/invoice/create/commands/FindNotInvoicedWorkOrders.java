@@ -9,6 +9,7 @@ import uo.ri.cws.application.service.invoice.create.DtoAssembler;
 import uo.ri.cws.application.util.command.Command;
 import uo.ri.cws.domain.types.Nif;
 import uo.ri.util.assertion.ArgumentChecks;
+import uo.ri.util.exception.BusinessChecks;
 import uo.ri.util.exception.BusinessException;
 
 public class FindNotInvoicedWorkOrders implements Command<List<InvoicingWorkOrderDto>> {
@@ -22,6 +23,7 @@ public class FindNotInvoicedWorkOrders implements Command<List<InvoicingWorkOrde
 
     @Override
     public List<InvoicingWorkOrderDto> execute() throws BusinessException {
+        BusinessChecks.isTrue(Nif.isValid(nif));
         return DtoAssembler.toInvoicingWorkOrderDtoList(repo.findNotInvoicedByClientNif(new Nif(nif)));
     }
 

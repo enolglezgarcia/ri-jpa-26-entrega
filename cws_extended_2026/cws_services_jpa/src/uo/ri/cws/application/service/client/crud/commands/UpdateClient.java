@@ -35,14 +35,21 @@ public class UpdateClient implements Command<Void> {
         Nif nif = new Nif(dto.nif);
         if (!nif.equals(c.getNif())) {
             checkNifDoesNotExist(nif);
+            BusinessChecks.isTrue(Nif.isValid(dto.nif));
             c.setNif(nif);
         }
+
+        BusinessChecks.isTrue(FullName.isValid(dto.name, dto.surname));
         FullName fullname = new FullName(dto.name, dto.surname);
         c.setFullName(fullname);
+        BusinessChecks.isTrue(PhoneNumber.isValid(dto.phone));
         PhoneNumber phone = new PhoneNumber(dto.phone);
         c.setPhone(phone);
+        BusinessChecks
+            .isTrue(Address.isValid(dto.addressStreet, dto.addressCity, dto.addressCountry, dto.addressZipcode));
         Address address = new Address(dto.addressStreet, dto.addressCity, dto.addressCountry, dto.addressZipcode);
         c.setAddress(address);
+        BusinessChecks.isTrue(Email.isValid(dto.email));
         Email email = new Email(dto.email);
         c.setEmail(email);
         c.updatedNow();

@@ -51,6 +51,13 @@ public class AddClient implements Command<ClientDto> {
 
     @Override
     public ClientDto execute() throws BusinessException {
+        BusinessChecks.isTrue(Nif.isValid(dto.nif));
+        BusinessChecks.isTrue(FullName.isValid(dto.name, dto.surname));
+        BusinessChecks
+            .isTrue(Address.isValid(dto.addressStreet, dto.addressCity, dto.addressCountry, dto.addressZipcode));
+        BusinessChecks.isTrue(PhoneNumber.isValid(dto.phone));
+        BusinessChecks.isTrue(Email.isValid(dto.email));
+
         Nif clientNif = new Nif(dto.nif);
         FullName fullname = new FullName(dto.name, dto.surname);
         Address address = new Address(dto.addressStreet, dto.addressCity, dto.addressCountry, dto.addressZipcode);
@@ -63,6 +70,7 @@ public class AddClient implements Command<ClientDto> {
         clientRepo.add(client);
 
         if (recommenderNif != null) {
+            BusinessChecks.isTrue(Nif.isValid(recommenderNif));
             Nif recoNif = new Nif(recommenderNif);
             Optional<Client> recommender = clientRepo.findByNif(recoNif);
             BusinessChecks.exists(recommender, "The recommender does not exist");

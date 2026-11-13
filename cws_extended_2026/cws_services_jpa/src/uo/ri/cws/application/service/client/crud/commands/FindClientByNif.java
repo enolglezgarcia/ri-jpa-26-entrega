@@ -9,20 +9,22 @@ import uo.ri.cws.application.service.client.crud.DtoAssembler;
 import uo.ri.cws.application.util.command.Command;
 import uo.ri.cws.domain.types.Nif;
 import uo.ri.util.assertion.ArgumentChecks;
+import uo.ri.util.exception.BusinessChecks;
 import uo.ri.util.exception.BusinessException;
 
 public class FindClientByNif implements Command<Optional<ClientDto>> {
-    private Nif nif;
+    private String nif;
     private ClientRepository clientRepo = Factories.repository.forClient();
 
     public FindClientByNif(String nif) {
         ArgumentChecks.isNotBlank(nif, "Nif cannot be null or blank");
-        this.nif = new Nif(nif);
+        this.nif = nif;
     }
 
     @Override
     public Optional<ClientDto> execute() throws BusinessException {
-        return clientRepo.findByNif(nif).map(c -> DtoAssembler.toDto(c));
+        BusinessChecks.isTrue(Nif.isValid(nif));
+        return clientRepo.findByNif(new Nif(nif)).map(c -> DtoAssembler.toDto(c));
     }
 
 }
