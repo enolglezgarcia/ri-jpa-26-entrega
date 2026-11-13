@@ -23,7 +23,7 @@ public class FindVouchersByClientNif implements Command<List<VoucherDto>> {
 
     @Override
     public List<VoucherDto> execute() throws BusinessException {
-        BusinessChecks.isTrue(Nif.isValid(clientNif));
+        BusinessChecks.isTrue(Nif.isValid(clientNif), "The client nif is not valid");
         return DtoAssembler.toDtoList(paymentMeanRepo.findVouchersByClientNif(new Nif(clientNif)));
     }
 

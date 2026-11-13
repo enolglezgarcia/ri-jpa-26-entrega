@@ -24,7 +24,7 @@ public class FindMechanicByNif implements Command<Optional<MechanicDto>> {
 
     @Override
     public Optional<MechanicDto> execute() throws BusinessException {
-        BusinessChecks.isTrue(Nif.isValid(nif));
+        BusinessChecks.isTrue(Nif.isValid(nif), "The mechanic nif is not valid");
         return repo.findByNif(new Nif(nif)).map(m -> DtoAssembler.toDto(m));
     }
 

@@ -23,7 +23,7 @@ public class FindNotInvoicedWorkOrders implements Command<List<InvoicingWorkOrde
 
     @Override
     public List<InvoicingWorkOrderDto> execute() throws BusinessException {
-        BusinessChecks.isTrue(Nif.isValid(nif));
+        BusinessChecks.isTrue(Nif.isValid(nif), "The client nif is not valid");
         return DtoAssembler.toInvoicingWorkOrderDtoList(repo.findNotInvoicedByClientNif(new Nif(nif)));
     }
 

@@ -23,7 +23,7 @@ public class FindClientByNif implements Command<Optional<ClientDto>> {
 
     @Override
     public Optional<ClientDto> execute() throws BusinessException {
-        BusinessChecks.isTrue(Nif.isValid(nif));
+        BusinessChecks.isTrue(Nif.isValid(nif), "The client nif is not valid");
         return clientRepo.findByNif(new Nif(nif)).map(c -> DtoAssembler.toDto(c));
     }
 

@@ -23,7 +23,7 @@ public class FindClientsRecommendedBy implements Command<List<ClientDto>> {
 
     @Override
     public List<ClientDto> execute() throws BusinessException {
-        BusinessChecks.isTrue(Nif.isValid(recommenderNif));
+        BusinessChecks.isTrue(Nif.isValid(recommenderNif), "The recommender nif is not valid");
         return DtoAssembler.toDtoList(clientRepo.findRecommendedBy(new Nif(recommenderNif)));
     }
 

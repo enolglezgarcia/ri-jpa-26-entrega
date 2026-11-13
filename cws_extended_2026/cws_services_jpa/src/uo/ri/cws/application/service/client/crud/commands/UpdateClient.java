@@ -32,24 +32,25 @@ public class UpdateClient implements Command<Void> {
         BusinessChecks.exists(oc, "The client does not exist");
         Client c = oc.get();
         BusinessChecks.hasVersion(dto.version, c.getVersion(), "Data out of date");
+        BusinessChecks.isTrue(Nif.isValid(dto.nif), "The client nif is not valid");
         Nif nif = new Nif(dto.nif);
         if (!nif.equals(c.getNif())) {
             checkNifDoesNotExist(nif);
-            BusinessChecks.isTrue(Nif.isValid(dto.nif));
             c.setNif(nif);
         }
 
-        BusinessChecks.isTrue(FullName.isValid(dto.name, dto.surname));
+        BusinessChecks.isTrue(FullName.isValid(dto.name, dto.surname), "The client fullname is not valid");
         FullName fullname = new FullName(dto.name, dto.surname);
         c.setFullName(fullname);
-        BusinessChecks.isTrue(PhoneNumber.isValid(dto.phone));
+        BusinessChecks.isTrue(PhoneNumber.isValid(dto.phone), "The client phone is not valid");
         PhoneNumber phone = new PhoneNumber(dto.phone);
         c.setPhone(phone);
-        BusinessChecks
-            .isTrue(Address.isValid(dto.addressStreet, dto.addressCity, dto.addressCountry, dto.addressZipcode));
+        BusinessChecks.isTrue(
+            Address.isValid(dto.addressStreet, dto.addressCity, dto.addressCountry, dto.addressZipcode),
+            "The client address is not valid");
         Address address = new Address(dto.addressStreet, dto.addressCity, dto.addressCountry, dto.addressZipcode);
         c.setAddress(address);
-        BusinessChecks.isTrue(Email.isValid(dto.email));
+        BusinessChecks.isTrue(Email.isValid(dto.email), "The client email is not valid");
         Email email = new Email(dto.email);
         c.setEmail(email);
         c.updatedNow();

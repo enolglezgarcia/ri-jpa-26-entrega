@@ -51,12 +51,13 @@ public class AddClient implements Command<ClientDto> {
 
     @Override
     public ClientDto execute() throws BusinessException {
-        BusinessChecks.isTrue(Nif.isValid(dto.nif));
-        BusinessChecks.isTrue(FullName.isValid(dto.name, dto.surname));
-        BusinessChecks
-            .isTrue(Address.isValid(dto.addressStreet, dto.addressCity, dto.addressCountry, dto.addressZipcode));
-        BusinessChecks.isTrue(PhoneNumber.isValid(dto.phone));
-        BusinessChecks.isTrue(Email.isValid(dto.email));
+        BusinessChecks.isTrue(Nif.isValid(dto.nif), "The client nif is not valid");
+        BusinessChecks.isTrue(FullName.isValid(dto.name, dto.surname), "The client fullname is not valid");
+        BusinessChecks.isTrue(
+            Address.isValid(dto.addressStreet, dto.addressCity, dto.addressCountry, dto.addressZipcode),
+            "The client address is not valid");
+        BusinessChecks.isTrue(PhoneNumber.isValid(dto.phone), "The client phone is not valid");
+        BusinessChecks.isTrue(Email.isValid(dto.email), "The client email is not valid");
 
         Nif clientNif = new Nif(dto.nif);
         FullName fullname = new FullName(dto.name, dto.surname);
@@ -70,7 +71,7 @@ public class AddClient implements Command<ClientDto> {
         clientRepo.add(client);
 
         if (recommenderNif != null) {
-            BusinessChecks.isTrue(Nif.isValid(recommenderNif));
+            BusinessChecks.isTrue(Nif.isValid(recommenderNif), "The recommender nif is not valid");
             Nif recoNif = new Nif(recommenderNif);
             Optional<Client> recommender = clientRepo.findByNif(recoNif);
             BusinessChecks.exists(recommender, "The recommender does not exist");

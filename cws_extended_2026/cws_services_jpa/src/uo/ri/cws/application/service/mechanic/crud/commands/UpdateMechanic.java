@@ -33,14 +33,14 @@ public class UpdateMechanic implements Command<Void> {
         BusinessChecks.exists(om, "The mechanic does not exist");
         Mechanic m = om.get();
         BusinessChecks.hasVersion(dto.version, m.getVersion(), "Data out of date");
+        BusinessChecks.isTrue(Nif.isValid(dto.nif), "The mechanic nif is not valid");
         Nif nif = new Nif(dto.nif);
 
         if (!nif.equals(m.getNif())) {
             checkNifDoesNotExist(nif);
-            BusinessChecks.isTrue(Nif.isValid(dto.nif));
             m.setNif(nif);
         }
-        BusinessChecks.isTrue(FullName.isValid(dto.name, dto.surname));
+        BusinessChecks.isTrue(FullName.isValid(dto.name, dto.surname), "The mechanic fullname is not valid");
         FullName fullname = new FullName(dto.name, dto.surname);
         m.setFullName(fullname);
         m.updatedNow();

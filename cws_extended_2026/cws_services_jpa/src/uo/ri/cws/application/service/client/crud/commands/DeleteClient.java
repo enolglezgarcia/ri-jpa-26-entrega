@@ -33,7 +33,7 @@ public class DeleteClient implements Command<Void> {
         checkClientExists(clientNif);
         checkClientHasNoVehicles(clientNif);
         checkClientHasNoPaidInvoices(clientNif);
-        BusinessChecks.isTrue(Nif.isValid(clientNif));
+        BusinessChecks.isTrue(Nif.isValid(clientNif), "The client nif is not valid");
         Client client = clientRepo.findByNif(new Nif(clientNif)).get();
 
         for (PaymentMean pm : client.getPaymentMeans()) {

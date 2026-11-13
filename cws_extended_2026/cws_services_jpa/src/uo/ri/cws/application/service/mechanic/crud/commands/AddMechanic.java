@@ -28,9 +28,9 @@ public class AddMechanic implements Command<MechanicDto> {
 
     @Override
     public MechanicDto execute() throws BusinessException {
-        BusinessChecks.isTrue(Nif.isValid(dto.nif));
+        BusinessChecks.isTrue(Nif.isValid(dto.nif), "The mechanic nif is not valid");
         Nif nif = new Nif(dto.nif);
-        BusinessChecks.isTrue(FullName.isValid(dto.name, dto.surname));
+        BusinessChecks.isTrue(FullName.isValid(dto.name, dto.surname), "The mechanic fullname is not valid");
         FullName fullname = new FullName(dto.name, dto.surname);
         Optional<Mechanic> om = repo.findByNif(nif);
         BusinessChecks.doesNotExist(om, "The mechanic is already registered");
