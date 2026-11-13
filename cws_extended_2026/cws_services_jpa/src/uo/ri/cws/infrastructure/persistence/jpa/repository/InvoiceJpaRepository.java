@@ -12,7 +12,7 @@ public class InvoiceJpaRepository extends BaseJpaRepository<Invoice> implements 
 
     @Override
     public Optional<Invoice> findByNumber(Long number) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return null;
     }
 
     @Override
