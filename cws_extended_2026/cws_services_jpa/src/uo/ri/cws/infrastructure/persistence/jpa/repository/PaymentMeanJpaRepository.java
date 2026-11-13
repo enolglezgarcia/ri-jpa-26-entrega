@@ -30,19 +30,16 @@ public class PaymentMeanJpaRepository extends BaseJpaRepository<PaymentMean> imp
 
     @Override
     public Optional<Voucher> findVoucherByCode(VoucherCode code) {
-        // TODO Auto-generated method stub
         return Optional.empty();
     }
 
     @Override
     public Optional<CreditCard> findCreditCardByNumber(CreditCardNumber number) {
-        // TODO Auto-generated method stub
         return Optional.empty();
     }
 
     @Override
     public List<PaymentMean> findByIds(Collection<String> ids) {
-        // TODO Auto-generated method stub
         return null;
     }
 

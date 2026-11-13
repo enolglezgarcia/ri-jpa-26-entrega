@@ -4,10 +4,9 @@ import uo.ri.cws.application.query.ClientQueries;
 
 public class ClientJpaQueries implements ClientQueries {
 
-	@Override
-	public boolean hasPaidInvoices(String clientId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean hasPaidInvoices(String clientId) {
+        return false;
+    }
 
 }

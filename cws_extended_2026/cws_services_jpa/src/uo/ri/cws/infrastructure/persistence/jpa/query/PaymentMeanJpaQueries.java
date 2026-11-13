@@ -7,16 +7,14 @@ import uo.ri.cws.application.service.paymentmean.VoucherGenerationService.Vouche
 
 public class PaymentMeanJpaQueries implements PaymentMeanQueries {
 
-	@Override
-	public boolean hasCharges(String paymentMeanId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean hasCharges(String paymentMeanId) {
+        return false;
+    }
 
-	@Override
-	public List<VoucherSummaryDto> getVouchersSummary() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<VoucherSummaryDto> getVouchersSummary() {
+        return null;
+    }
 
 }

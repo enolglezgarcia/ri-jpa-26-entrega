@@ -26,13 +26,11 @@ public class ClientJpaRepository extends BaseJpaRepository<Client> implements Cl
 
     @Override
     public List<Client> findWithWorkOrdersUnusedForVoucher(int minimumWorkOrders) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public List<Client> findWithRecommendationsUnusedForVoucher(int minimumRecommendations) {
-        // TODO Auto-generated method stub
         return null;
     }
 

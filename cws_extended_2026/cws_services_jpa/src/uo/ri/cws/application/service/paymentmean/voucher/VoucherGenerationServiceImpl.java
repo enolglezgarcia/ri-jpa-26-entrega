@@ -24,7 +24,6 @@ public class VoucherGenerationServiceImpl implements VoucherGenerationService {
 
     @Override
     public List<VoucherSummaryDto> getVoucherSummary() throws BusinessException {
-        // TODO Auto-generated method stub
         return null;
     }
 
